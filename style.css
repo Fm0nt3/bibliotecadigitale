@@ -143,7 +143,7 @@ h3 {
 
 .status.partial { background-color: #fff3cd; color: #856404; }
 .status.full { background-color: #d4edda; color: #155724; }
-.status.update { background-color: #e2e3e5; color: #383d41; }
+.status.update { background-color: #c41a0e; color: #331b14; }
 
 .btn-small {
     background: var(--primary-color);
