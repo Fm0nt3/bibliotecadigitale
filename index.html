@@ -44,9 +44,9 @@
             
             <div class="book-card">
                 <div class="book-cover">📕</div> <h4>Basso Medioevo</h4>
-                <p>Storia Universale Feltrinelli</p>
+                <p>Storia Europea 3° Edizione</p>
                 <p class="status partial">Scansione Parziale</p>
-                <button class="btn-small">Vedi Dettagli</button>
+                <button class="btn-small" onclick="apriModale('modal-libro1')">Vedi Dettagli</button>
             </div>
 
             <div class="book-card">
@@ -96,5 +96,43 @@
         </div>
     </footer>
 
+    <div id="modal-libro1" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="chiudiModale('modal-libro1')">&times;</span>
+            <h2>Basso Medioevo</h2>
+            <p>Dettagli: Storia Europea 3° Edizione</p>
+            <div class="alert-banner" style="margin: 10px 0;">⚠️ La maggior parte delle pagine sono in fase di scansione.</div>
+            
+            <div class="modal-gallery">
+                <img src="images/BassoMedioevo1" alt="Pagina 1">
+                <img src="images/BassoMedioevo2" alt="Pagina 2">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // Funzione per aprire il modale
+        function apriModale(id) {
+            document.getElementById(id).style.display = "block";
+            // Blocca lo scorrimento della pagina sotto
+            document.body.style.overflow = "hidden";
+        }
+
+        // Funzione per chiudere il modale
+        function chiudiModale(id) {
+            document.getElementById(id).style.display = "none";
+            // Riattiva lo scorrimento della pagina
+            document.body.style.overflow = "auto";
+        }
+
+        // Chiudi se clicchi fuori dalla finestra bianca (sullo sfondo scuro)
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+    </script>
+    
 </body>
 </html>
