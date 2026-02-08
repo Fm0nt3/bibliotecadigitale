@@ -15,97 +15,147 @@
             --text: #333;
         }
         body { margin: 0; font-family: 'Lato', sans-serif; background: var(--bg); color: var(--text); }
-        h1, h2, h3 { font-family: 'Cinzel', serif; color: var(--primary); }
+        h1, h2, h3 { font-family: 'Cinzel', serif; color: var(--primary); margin: 10px 0; }
         
         /* Layout Base */
         .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
         header { text-align: center; padding: 30px 20px; border-bottom: 4px solid var(--primary); background: #fff; }
-        .alert { background: var(--primary); color: #fff; text-align: center; padding: 10px; font-size: 0.9rem; }
+        .logo { max-width: 80px; margin-bottom: 10px; } /* Stile per il logo opzionale */
+
+        /* Banner di Avviso in alto */
+        .alert-top { background: var(--primary); color: #fff; text-align: center; padding: 10px; font-size: 0.9rem; }
 
         /* Griglia Home Page */
-        .book-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
-        .book-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; border: 1px solid #ddd; }
-        .book-icon { font-size: 4rem; display: block; margin-bottom: 10px; }
-        .btn { background: var(--primary); color: #fff; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; font-size: 1rem; margin-top: 10px; }
+        .book-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; margin-top: 40px; }
+        .book-card { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; border: 1px solid #ddd; transition: transform 0.2s; }
+        .book-card:hover { transform: translateY(-5px); }
+        .book-icon { font-size: 4rem; display: block; margin-bottom: 15px; }
+        
+        /* --- LE BARRE DI STATO (Ripristinate) --- */
+        .status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 10px 0;
+            letter-spacing: 0.5px;
+        }
+        /* Colori degli stati */
+        .status.partial { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; } /* Giallo */
+        .status.full { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }    /* Verde */
+        .status.update { background: #e2e3e5; color: #383d41; border: 1px solid #d6d8db; }  /* Grigio */
+
+        /* Bottoni */
+        .btn { background: var(--primary); color: #fff; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; font-size: 1rem; margin-top: 15px; transition: background 0.3s; }
         .btn:hover { background: #1a252f; }
 
         /* PAGINE DETTAGLIO (Nascoste all'inizio) */
-        .page-section { display: none; animation: fadeIn 0.5s; } /* Tutte le sezioni sono nascoste di base */
-        .page-section.active { display: block; } /* Solo quella attiva si vede */
+        .page-section { display: none; animation: fadeIn 0.5s; }
+        .page-section.active { display: block; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .back-btn { background: none; border: 2px solid var(--primary); color: var(--primary); padding: 5px 15px; cursor: pointer; font-weight: bold; margin-bottom: 20px; }
+        .back-btn { background: none; border: 2px solid var(--primary); color: var(--primary); padding: 5px 15px; cursor: pointer; font-weight: bold; margin-bottom: 20px; border-radius: 4px; }
+        .back-btn:hover { background: var(--primary); color: white; }
+
+        /* Avviso specifico dentro la pagina libro */
+        .book-alert { padding: 15px; border-radius: 5px; margin: 20px 0; font-size: 0.9rem; }
         
         /* Griglia Foto nei Dettagli */
-        .scan-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
-        .scan-item img { width: 100%; height: 200px; object-fit: cover; border: 1px solid #ccc; cursor: pointer; transition: transform 0.2s; }
+        .scan-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; margin-top: 20px; }
+        .scan-item { text-align: center; }
+        .scan-item img { width: 100%; height: 220px; object-fit: cover; border: 1px solid #ccc; cursor: pointer; transition: transform 0.2s; border-radius: 4px; }
         .scan-item img:hover { transform: scale(1.05); border-color: var(--accent); }
 
         /* VISUALIZZATORE ZOOM (Lightbox) */
         #lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; overflow: auto; text-align: center; }
-        #lightbox-img { margin: auto; display: block; max-width: 90%; margin-top: 50px; transition: transform 0.3s; cursor: zoom-in; }
-        #lightbox-img.zoomed { transform: scale(2.5); margin-top: 100px; cursor: grab; max-width: none; } /* ZOOM POTENTE */
-        .close-light { position: fixed; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; z-index: 2001; font-weight: bold; }
-        .zoom-hint { color: #ccc; position: fixed; bottom: 20px; width: 100%; text-align: center; pointer-events: none; }
+        #lightbox-img { margin: auto; display: block; max-width: 90%; max-height: 90vh; margin-top: 5vh; transition: transform 0.3s; cursor: zoom-in; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
+        #lightbox-img.zoomed { transform: scale(2.5); margin-top: 100px; cursor: grab; max-width: none; max-height: none; }
+        .close-light { position: fixed; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; z-index: 2001; font-weight: bold; background: rgba(0,0,0,0.5); padding: 0 10px; border-radius: 5px; }
+        .zoom-hint { color: #aaa; position: fixed; bottom: 20px; width: 100%; text-align: center; pointer-events: none; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-    <div class="alert">⚠️ Sito in aggiornamento: Alcune scansioni potrebbero essere parziali.</div>
+    <div class="alert-top">⚠️ Sito in continuo aggiornamento: Il processo di digitalizzazione è in corso.</div>
 
     <header>
         <h1>Monastero di San Andro Pertiños</h1>
-        <p>Biblioteca Digitale & Archivio</p>
+        <p>Biblioteca Digitale & Archivio Storico</p>
     </header>
 
     <div class="container">
 
         <div id="home-view" class="page-section active">
-            <h2>Catalogo Opere</h2>
-            <p>Seleziona un volume per consultare le scansioni digitali.</p>
+            <div style="text-align:center; margin-bottom:30px;">
+                <h2>Catalogo Opere</h2>
+                <p>Esplora i manoscritti attualmente disponibili per la consultazione.</p>
+            </div>
             
             <div class="book-grid">
                 
                 <div class="book-card">
                     <span class="book-icon">📖</span>
-                    <h3>Antifonario Gregoriano</h3>
-                    <p>Secolo XIV - Canti Liturgici</p>
+                    <h3>Basso Medioevo</h3>
+                    
+                    
+                    
+                    <p>Storia Europea, 6° Libro </p>
+                    <span class="status partial">Scansione Parziale</span>
                     <button class="btn" onclick="mostraLibro('libro-antifonario')">Vedi Dettagli</button>
                 </div>
 
                 <div class="book-card">
                     <span class="book-icon">📜</span>
                     <h3>Cronache del Monastero</h3>
-                    <p>Secolo XVII - Manoscritto</p>
+                    
+                    <span class="status full">Completo</span>
+                    
+                    <p>Secolo XVII - Diario dell'Abate.</p>
                     <button class="btn" onclick="mostraLibro('libro-cronache')">Vedi Dettagli</button>
                 </div>
 
+                <div class="book-card">
+                    <span class="book-icon">🌿</span>
+                    <h3>De Herbarum Virtutibus</h3>
+                    
+                    <span class="status update">In Lavorazione</span>
+                    
+                    <p>Secolo XV - Trattato di botanica.</p>
+                    <button class="btn" onclick="alert('Presto disponibile!')">Presto online</button>
                 </div>
+
+            </div>
         </div>
 
         <div id="libro-antifonario" class="page-section">
             <button class="back-btn" onclick="tornaHome()">⬅ Torna al Catalogo</button>
-            <h2>Antifonario Gregoriano</h2>
-            <p><em>Scansione ad alta risoluzione del manoscritto originale.</em></p>
-            <div class="alert" style="background:#fff3cd; color:#856404; border:1px solid #ffeeba;">⚠️ Nota: Le pagine finali sono in restauro.</div>
+            <h2>Basso Medioevo</h2>
+            
+            <div class="book-alert" style="background:#fff3cd; color:#856404; border:1px solid #ffeeba;">
+        
+            </div>
 
             <div class="scan-grid">
                 <div class="scan-item">
                     <img src="BassoMedioevo1.PNG" onclick="apriZoom(this)">
-                    <p><small>Folio 1</small></p>
+                    <p><small>Pagina 1 </small></p>
                 </div>
                 <div class="scan-item">
                     <img src="BassoMedioevo2.PNG" onclick="apriZoom(this)">
-                    <p><small>Folio 2</small></p>
+                    <p><small>Pagina 2 </small></p>
                 </div>
-            </div>
+                 </div>
         </div>
 
         <div id="libro-cronache" class="page-section">
             <button class="back-btn" onclick="tornaHome()">⬅ Torna al Catalogo</button>
             <h2>Cronache del Monastero</h2>
-            <p>Diario dell'Abate, anno 1642.</p>
+            <div class="book-alert" style="background:#d4edda; color:#155724; border:1px solid #c3e6cb;">
+                ✅ Digitalizzazione completata.
+            </div>
 
             <div class="scan-grid">
                 <div class="scan-item"><img src="cronaca1.jpg" onclick="apriZoom(this)"></div>
@@ -118,17 +168,15 @@
     <div id="lightbox">
         <span class="close-light" onclick="chiudiZoom()">&times;</span>
         <img id="lightbox-img" onclick="toggleZoomMode()">
-        <p class="zoom-hint">Clicca l'immagine per Zoomare • Trascina per muoverti</p>
+        <p class="zoom-hint">Clicca l'immagine per Zoomare (250%) • Trascina per muoverti</p>
     </div>
 
     <script>
-        // Funzione per cambiare "Pagina"
+        // Navigazione
         function mostraLibro(idLibro) {
-            // Nasconde tutto
             document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
-            // Mostra solo il libro richiesto
             document.getElementById(idLibro).classList.add('active');
-            window.scrollTo(0,0); // Torna in alto
+            window.scrollTo(0,0);
         }
 
         function tornaHome() {
@@ -136,15 +184,15 @@
             document.getElementById('home-view').classList.add('active');
         }
 
-        // Funzioni Zoom
+        // Zoom
         const lightbox = document.getElementById('lightbox');
         const lImg = document.getElementById('lightbox-img');
 
         function apriZoom(imgElement) {
             lightbox.style.display = "block";
             lImg.src = imgElement.src;
-            lImg.classList.remove('zoomed'); // Parte senza zoom
-            document.body.style.overflow = "hidden"; // Blocca scroll sito
+            lImg.classList.remove('zoomed');
+            document.body.style.overflow = "hidden";
         }
 
         function chiudiZoom() {
