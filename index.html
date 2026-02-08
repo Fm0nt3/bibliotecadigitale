@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Monastero San Andro Pertiños</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- STILI (CSS) --- */
+        :root {
+            --primary: #2c3e50;
+            --accent: #c0392b;
+            --bg: #f4f1ea;
+            --text: #333;
+        }
+        body { margin: 0; font-family: 'Lato', sans-serif; background: var(--bg); color: var(--text); }
+        h1, h2, h3 { font-family: 'Cinzel', serif; color: var(--primary); }
+        
+        /* Layout Base */
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; padding: 30px 20px; border-bottom: 4px solid var(--primary); background: #fff; }
+        .alert { background: var(--primary); color: #fff; text-align: center; padding: 10px; font-size: 0.9rem; }
+
+        /* Griglia Home Page */
+        .book-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .book-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; border: 1px solid #ddd; }
+        .book-icon { font-size: 4rem; display: block; margin-bottom: 10px; }
+        .btn { background: var(--primary); color: #fff; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; font-size: 1rem; margin-top: 10px; }
+        .btn:hover { background: #1a252f; }
+
+        /* PAGINE DETTAGLIO (Nascoste all'inizio) */
+        .page-section { display: none; animation: fadeIn 0.5s; } /* Tutte le sezioni sono nascoste di base */
+        .page-section.active { display: block; } /* Solo quella attiva si vede */
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .back-btn { background: none; border: 2px solid var(--primary); color: var(--primary); padding: 5px 15px; cursor: pointer; font-weight: bold; margin-bottom: 20px; }
+        
+        /* Griglia Foto nei Dettagli */
+        .scan-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
+        .scan-item img { width: 100%; height: 200px; object-fit: cover; border: 1px solid #ccc; cursor: pointer; transition: transform 0.2s; }
+        .scan-item img:hover { transform: scale(1.05); border-color: var(--accent); }
+
+        /* VISUALIZZATORE ZOOM (Lightbox) */
+        #lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; overflow: auto; text-align: center; }
+        #lightbox-img { margin: auto; display: block; max-width: 90%; margin-top: 50px; transition: transform 0.3s; cursor: zoom-in; }
+        #lightbox-img.zoomed { transform: scale(2.5); margin-top: 100px; cursor: grab; max-width: none; } /* ZOOM POTENTE */
+        .close-light { position: fixed; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; z-index: 2001; font-weight: bold; }
+        .zoom-hint { color: #ccc; position: fixed; bottom: 20px; width: 100%; text-align: center; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="alert">⚠️ Sito in aggiornamento: Alcune scansioni potrebbero essere parziali.</div>
+
+    <header>
+        <h1>Monastero di San Andro Pertiños</h1>
+        <p>Biblioteca Digitale & Archivio</p>
+    </header>
+
+    <div class="container">
+
+        <div id="home-view" class="page-section active">
+            <h2>Catalogo Opere</h2>
+            <p>Seleziona un volume per consultare le scansioni digitali.</p>
+            
+            <div class="book-grid">
+                
+                <div class="book-card">
+                    <span class="book-icon">📖</span>
+                    <h3>Antifonario Gregoriano</h3>
+                    <p>Secolo XIV - Canti Liturgici</p>
+                    <button class="btn" onclick="mostraLibro('libro-antifonario')">Vedi Dettagli</button>
+                </div>
+
+                <div class="book-card">
+                    <span class="book-icon">📜</span>
+                    <h3>Cronache del Monastero</h3>
+                    <p>Secolo XVII - Manoscritto</p>
+                    <button class="btn" onclick="mostraLibro('libro-cronache')">Vedi Dettagli</button>
+                </div>
+
+                </div>
+        </div>
+
+        <div id="libro-antifonario" class="page-section">
+            <button class="back-btn" onclick="tornaHome()">⬅ Torna al Catalogo</button>
+            <h2>Antifonario Gregoriano</h2>
+            <p><em>Scansione ad alta risoluzione del manoscritto originale.</em></p>
+            <div class="alert" style="background:#fff3cd; color:#856404; border:1px solid #ffeeba;">⚠️ Nota: Le pagine finali sono in restauro.</div>
+
+            <div class="scan-grid">
+                <div class="scan-item">
+                    <img src="BassoMedioevo1.PNG" onclick="apriZoom(this)">
+                    <p><small>Folio 1</small></p>
+                </div>
+                <div class="scan-item">
+                    <img src="BassoMedioevo2.PNG" onclick="apriZoom(this)">
+                    <p><small>Folio 2</small></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="libro-cronache" class="page-section">
+            <button class="back-btn" onclick="tornaHome()">⬅ Torna al Catalogo</button>
+            <h2>Cronache del Monastero</h2>
+            <p>Diario dell'Abate, anno 1642.</p>
+
+            <div class="scan-grid">
+                <div class="scan-item"><img src="cronaca1.jpg" onclick="apriZoom(this)"></div>
+                <div class="scan-item"><img src="cronaca2.jpg" onclick="apriZoom(this)"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="lightbox">
+        <span class="close-light" onclick="chiudiZoom()">&times;</span>
+        <img id="lightbox-img" onclick="toggleZoomMode()">
+        <p class="zoom-hint">Clicca l'immagine per Zoomare • Trascina per muoverti</p>
+    </div>
+
+    <script>
+        // Funzione per cambiare "Pagina"
+        function mostraLibro(idLibro) {
+            // Nasconde tutto
+            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+            // Mostra solo il libro richiesto
+            document.getElementById(idLibro).classList.add('active');
+            window.scrollTo(0,0); // Torna in alto
+        }
+
+        function tornaHome() {
+            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+            document.getElementById('home-view').classList.add('active');
+        }
+
+        // Funzioni Zoom
+        const lightbox = document.getElementById('lightbox');
+        const lImg = document.getElementById('lightbox-img');
+
+        function apriZoom(imgElement) {
+            lightbox.style.display = "block";
+            lImg.src = imgElement.src;
+            lImg.classList.remove('zoomed'); // Parte senza zoom
+            document.body.style.overflow = "hidden"; // Blocca scroll sito
+        }
+
+        function chiudiZoom() {
+            lightbox.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function toggleZoomMode() {
+            lImg.classList.toggle('zoomed');
+        }
+    </script>
+
+</body>
+</html>
