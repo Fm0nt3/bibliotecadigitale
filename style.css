@@ -1,0 +1,221 @@
+/* Variabili Colore: Stile "Monastico Moderno" */
+:root {
+    --primary-color: #2c3e50;    /* Blu scuro/Grigio ardesia */
+    --accent-color: #c0392b;     /* Rosso ceralacca per gli avvisi */
+    --bg-color: #f4f1ea;         /* Colore pergamena chiaro */
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --font-heading: 'Cinzel', serif; /* Font elegante per titoli */
+    --font-body: 'Lato', sans-serif; /* Font moderno per lettura */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Container Generale */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background-color: #fff;
+    padding: 20px 0;
+    border-bottom: 4px solid var(--primary-color);
+    text-align: center;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    max-width: 100px; /* Dimensione logo */
+    height: auto;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    font-size: 2rem;
+}
+
+/* Banner di Avviso */
+.alert-banner {
+    background-color: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9rem;
+    border-bottom: 3px solid var(--accent-color);
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1507842217121-9e691b2d09c7?auto=format&fit=crop&w=1500&q=80'); /* Immagine di sfondo generica di biblioteca */
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.hero h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: #a93226;
+}
+
+/* Catalogo */
+#catalogo {
+    padding: 50px 20px;
+}
+
+h3 {
+    font-family: var(--font-heading);
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: var(--primary-color);
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.book-card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.book-cover {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    background: #eee;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.status {
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 10px 0;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.status.partial { background-color: #fff3cd; color: #856404; }
+.status.full { background-color: #d4edda; color: #155724; }
+.status.update { background-color: #c41a0e; color: #331b14; }
+
+.btn-small {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+/* --- STILE PER LE FINESTRE MODALI (POPUP) --- */
+
+/* Lo sfondo scuro che copre il sito */
+.modal-overlay {
+    display: none; /* Nascosto di default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8); /* Nero semitrasparente */
+    overflow: auto; /* Permette di scorrere se le foto sono tante */
+}
+
+/* La finestra bianca centrale */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 5% dall'alto, centrato orizzontalmente */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; /* Larghezza su mobile */
+    max-width: 800px; /* Larghezza massima su PC */
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Il bottone X per chiudere */
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: var(--accent-color);
+}
+
+/* Stile delle immagini dentro il popup */
+.modal-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    border: 3px solid #eee;
+}
