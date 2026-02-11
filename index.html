@@ -45,7 +45,7 @@
         /* Colori degli stati */
         .status.partial { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; } /* Giallo */
         .status.full { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }    /* Verde */
-        .status.update { background: #e2e3e5; color: #383d41; border: 1px solid #d6d8db; }  /* Grigio */
+        .status.update { background: #bd3a31; color: #3d1411; border: 1px solid #d6d8db; }  /* Rosso */
 
         /* Bottoni */
         .btn { background: var(--primary); color: #fff; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; font-size: 1rem; margin-top: 15px; transition: background 0.3s; }
@@ -96,36 +96,6 @@
             
             <div class="book-grid">
                 
-                <div class="book-card">
-                    <span class="book-icon">📖</span>
-                    <h3>Basso Medioevo</h3>
-                    
-                    
-                    
-                    <p>Storia Europea, 6° Libro </p>
-                    <span class="status partial">Scansione Parziale</span>
-                    <button class="btn" onclick="mostraLibro('libro-antifonario')">Vedi Dettagli</button>
-                </div>
-
-                <div class="book-card">
-                    <span class="book-icon">📜</span>
-                    <h3>Cronache del Monastero</h3>
-                    
-                    <span class="status full">Completo</span>
-                    
-                    <p>Secolo XVII - Diario dell'Abate.</p>
-                    <button class="btn" onclick="mostraLibro('libro-cronache')">Vedi Dettagli</button>
-                </div>
-
-                <div class="book-card">
-                    <span class="book-icon">🌿</span>
-                    <h3>De Herbarum Virtutibus</h3>
-                    
-                    <span class="status update">In Lavorazione</span>
-                    
-                    <p>Secolo XV - Trattato di botanica.</p>
-                    <button class="btn" onclick="alert('Presto disponibile!')">Presto online</button>
-                </div>
 
                 <div class="book-card">
                     <span class="book-icon">⛪</span> 
@@ -148,44 +118,49 @@
                 <div class="book-card">
                     <span class="book-icon">🌿</span>
                     <h4>La cucina vegana</h4>
-                    <p>Nuova edizione - Parrot Elena</p>
                     <p class="status update">Non disponibile</p>
+                    <p>Nuova edizione - Parrot Elena</p>
+                    
                     <button class="btn" onclick="alert('Presto disponibile!')">Presto online</button>
                 </div>
 
                 <div class="book-card">
                     <span class="book-icon">📜</span> <h4>Politica</h4>
-                    <p>Aristotele</p>
                     <p class="status update">Non disponibile</p>
-                    <button class="btn-small">Dettagli non disponibili</button>
+                    <p>Aristotele</p>
+                    
+                    <button class="btn" onclick="alert('Presto disponibile!')">Presto online</button>
                 </div>
 
                 <div class="book-card">
                     <span class="book-icon">📙</span>
                     <h4>Islamismo I</h4>
-                    <p>Storia Universale Feltrinelli</p>
                     <p class="status partial">Scansione parziale</p>
-                    <button class="btn-small">Vedi Dettagli</button>
+                    <p>Storia Universale Feltrinelli</p>
+                    
+                    <button class="btn" onclick="mostraLibro('islamismo')">Vedi Dettagli</button>
                 </div>
 
                 <div class="book-card">
-                    <span class="book-icon">🏺</span> <h4>I Greci e i Persiani</h4>
-                    <p>Storia Universale Feltrinelli</p>
+                    <span class="book-icon">🏺</span> <h4>Le guerre puniche</h4>
                     <p class="status partial">Scansione Parziale</p>
-                    <button class="btn-small">Vedi Dettagli</button>
+                    <p>Storia Universale Feltrinelli</p>
+                    
+                    <button class="btn" onclick="mostraLibro('storia')">Vedi Dettagli</button>
                 </div>
 
                 <div class="book-card">
                     <span class="book-icon">📖</span> <h4>Saggio sull'origine delle idee</h4>
-                    <p>A. Rosmini</p>
                     <p class="status update">Non disponibile</p>
-                    <button class="btn-small">Dettagli non disponibili</button>
+                    <p>A. Rosmini</p>
+                    
+                    <button class="btn" onclick="alert('Presto disponibile!')">Presto online</button>
                 </div>
 
             </div>
         </div>
 
-        <div id="libro-antifonario" class="page-section">
+        <div id="medioevo" class="page-section">
             <button class="back-btn" onclick="tornaHome()">⬅ Torna al Catalogo</button>
             <h2>Basso Medioevo</h2>
             
